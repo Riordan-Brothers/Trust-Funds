@@ -1,0 +1,54 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name: Dynamark Media Inc.
+System Name:
+System Number:
+Programmer: Troy Garner
+Comments: Analog offset module which adds or removes an offset from an input analog value
+          and also deals with removing the offset for any feedback.
+*/
+
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+
+#SYMBOL_NAME "Analog Offset"
+#CATEGORY "46" "Analog" /* custom */
+
+#ENABLE_TRACE
+#ENABLE_STACK_CHECKING
+#DEFAULT_VOLATILE
+
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+*******************************************************************************************/
+
+ANALOG_INPUT in, out;
+ANALOG_OUTPUT out_fb, in_fb;
+
+/*******************************************************************************************
+  Parameters
+  (Uncomment and declare parameters as needed)
+*******************************************************************************************/
+
+INTEGER_PARAMETER _SKIP_, _SKIP_, offset;
+
+/*******************************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+*******************************************************************************************/
+
+CHANGE in
+{
+    out_fb = in + offset;
+}
+
+CHANGE out
+{
+    in_fb = out - offset;
+}
